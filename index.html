@@ -1,0 +1,506 @@
+<!doctype html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Défi de Décision Responsable — Page fondatrice</title>
+  <style>
+    :root{
+      --bg: #0b0d12;
+      --card: #121726;
+      --muted: #9aa4b2;
+      --text: #e7edf5;
+      --accent: #7aa2ff;
+      --danger: #ff6b6b;
+      --ok: #51cf66;
+      --border: rgba(255,255,255,0.10);
+      --shadow: 0 10px 30px rgba(0,0,0,0.35);
+    }
+
+    *{ box-sizing: border-box; }
+    body{
+      margin: 0;
+      font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Arial, "Noto Sans", "Helvetica Neue", sans-serif;
+      background: radial-gradient(1200px 900px at 20% 10%, rgba(122,162,255,0.18), transparent 60%),
+                  radial-gradient(900px 700px at 80% 30%, rgba(81,207,102,0.10), transparent 55%),
+                  var(--bg);
+      color: var(--text);
+      line-height: 1.55;
+    }
+
+    a{ color: var(--accent); text-decoration: none; }
+    a:hover{ text-decoration: underline; }
+
+    header{
+      padding: 48px 18px 18px;
+      max-width: 980px;
+      margin: 0 auto;
+    }
+    .kicker{
+      color: var(--muted);
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      font-size: 12px;
+      margin-bottom: 10px;
+    }
+    h1{
+      margin: 0 0 10px;
+      font-size: clamp(26px, 3.2vw, 40px);
+      line-height: 1.15;
+    }
+    .subtitle{
+      margin: 0;
+      color: var(--muted);
+      max-width: 70ch;
+    }
+
+    main{
+      max-width: 980px;
+      margin: 0 auto;
+      padding: 18px 18px 64px;
+      display: grid;
+      grid-template-columns: 1.35fr 0.65fr;
+      gap: 18px;
+    }
+
+    @media (max-width: 920px){
+      main{ grid-template-columns: 1fr; }
+    }
+
+    .card{
+      background: linear-gradient(180deg, rgba(255,255,255,0.04), rgba(255,255,255,0.02));
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      box-shadow: var(--shadow);
+      padding: 18px;
+    }
+
+    .card h2{
+      margin: 0 0 10px;
+      font-size: 18px;
+      letter-spacing: 0.01em;
+    }
+
+    .section-title{
+      margin: 18px 0 10px;
+      font-size: 16px;
+      color: #d7e0ea;
+    }
+
+    .muted{ color: var(--muted); }
+    .hr{
+      height: 1px;
+      background: var(--border);
+      margin: 16px 0;
+    }
+
+    .rules{
+      padding-left: 18px;
+      margin: 8px 0 0;
+    }
+    .rules li{ margin: 10px 0; }
+    .rules strong{ color: #ffffff; }
+
+    blockquote{
+      margin: 12px 0;
+      padding: 12px 14px;
+      border-left: 3px solid var(--accent);
+      background: rgba(122,162,255,0.08);
+      border-radius: 12px;
+    }
+
+    .pill{
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 12px;
+      border: 1px solid var(--border);
+      border-radius: 999px;
+      padding: 6px 10px;
+      color: var(--muted);
+      background: rgba(255,255,255,0.03);
+    }
+
+    .btn-row{
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-top: 12px;
+    }
+
+    button{
+      border: 1px solid var(--border);
+      background: rgba(255,255,255,0.03);
+      color: var(--text);
+      padding: 10px 12px;
+      border-radius: 12px;
+      cursor: pointer;
+      transition: transform .04s ease, border-color .15s ease, background .15s ease;
+      font-weight: 600;
+    }
+    button:hover{
+      border-color: rgba(122,162,255,0.55);
+      background: rgba(122,162,255,0.08);
+    }
+    button:active{ transform: translateY(1px); }
+    .btn-yes:hover{ border-color: rgba(81,207,102,0.55); background: rgba(81,207,102,0.10); }
+    .btn-no:hover{ border-color: rgba(255,107,107,0.55); background: rgba(255,107,107,0.10); }
+
+    .stat{
+      display: grid;
+      grid-template-columns: 1fr auto;
+      gap: 10px;
+      align-items: center;
+      margin-top: 12px;
+    }
+
+    .bar{
+      height: 10px;
+      border-radius: 999px;
+      overflow: hidden;
+      border: 1px solid var(--border);
+      background: rgba(255,255,255,0.03);
+    }
+
+    .bar > div{
+      height: 100%;
+      width: 50%;
+      background: linear-gradient(90deg, rgba(81,207,102,0.85), rgba(122,162,255,0.85));
+      transition: width .25s ease;
+    }
+
+    .stat small{ color: var(--muted); }
+
+    label{
+      display: block;
+      font-size: 12px;
+      color: var(--muted);
+      margin-top: 10px;
+      margin-bottom: 6px;
+    }
+    input, textarea, select{
+      width: 100%;
+      padding: 10px 12px;
+      border-radius: 12px;
+      border: 1px solid var(--border);
+      background: rgba(0,0,0,0.25);
+      color: var(--text);
+      outline: none;
+    }
+    textarea{ min-height: 110px; resize: vertical; }
+    input:focus, textarea:focus, select:focus{
+      border-color: rgba(122,162,255,0.55);
+      box-shadow: 0 0 0 3px rgba(122,162,255,0.12);
+    }
+
+    .toast{
+      margin-top: 12px;
+      padding: 10px 12px;
+      border-radius: 12px;
+      border: 1px solid var(--border);
+      background: rgba(255,255,255,0.03);
+      color: var(--muted);
+      display: none;
+    }
+    .toast.show{ display: block; }
+
+    .footer{
+      margin-top: 10px;
+      font-size: 12px;
+      color: var(--muted);
+    }
+
+    .mono{
+      font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+      font-size: 12px;
+      color: #cfe1ff;
+    }
+
+    .tag{
+      font-size: 12px;
+      color: var(--muted);
+      margin-top: 8px;
+      display: flex;
+      gap: 8px;
+      flex-wrap: wrap;
+    }
+
+    .tag span{
+      border: 1px solid var(--border);
+      border-radius: 999px;
+      padding: 6px 10px;
+      background: rgba(255,255,255,0.03);
+    }
+  </style>
+</head>
+
+<body>
+  <header>
+    <div class="kicker">Défi de Décision Responsable</div>
+    <h1>Page fondatrice</h1>
+    <p class="subtitle">
+      Un dispositif d’épreuves où l’on apprend pour décider, où l’on décide sans filet, et où la confiance engage.
+    </p>
+    <div class="tag">
+      <span>Décision</span><span>Apprentissage</span><span>Responsabilité</span><span>Confiance</span>
+    </div>
+  </header>
+
+  <main>
+    <!-- Colonne principale -->
+    <section class="card" aria-label="Texte fondateur">
+      <h2>1. Ce qu’est un Défi de Décision Responsable</h2>
+      <p>
+        Un <strong>Défi de Décision Responsable</strong> est une épreuve publique dans laquelle une personne accepte de :
+      </p>
+      <ul class="rules">
+        <li>apprendre seule un sujet délimité,</li>
+        <li>prendre une <strong>décision claire et exclusive</strong>,</li>
+        <li>exposer publiquement son raisonnement,</li>
+        <li><strong>signer</strong> cette décision,</li>
+        <li>pendant que d’autres choisissent librement de lui faire confiance ou non.</li>
+      </ul>
+
+      <div class="hr"></div>
+
+      <h3 class="section-title">2. Ce que ce lieu n’est pas</h3>
+      <ul class="rules">
+        <li>un espace de débat infini,</li>
+        <li>un endroit pour montrer qu’on a raison,</li>
+        <li>un système de vote ou de consensus,</li>
+        <li>une simulation sans conséquence symbolique.</li>
+      </ul>
+      <p><strong>Ici, on ne cherche pas la meilleure réponse.</strong> On cherche une <strong>décision assumée</strong>.</p>
+
+      <div class="hr"></div>
+
+      <h3 class="section-title">3. Le principe central</h3>
+      <blockquote>
+        Toute décision engage celui qui la prend.<br/>
+        Toute confiance engage celui qui l’accorde.
+      </blockquote>
+      <p class="muted">
+        Rien n’est anonyme. Rien n’est dilué dans le groupe. Rien n’est optimisé après coup.
+      </p>
+
+      <div class="hr"></div>
+
+      <h3 class="section-title">4. Les règles non négociables</h3>
+      <ol class="rules">
+        <li>
+          <strong>Une décision, pas un éventail :</strong>
+          pas de “ça dépend”, pas de scénarios multiples. Une décision nette.
+        </li>
+        <li>
+          <strong>Temps strictement limité :</strong>
+          la contrainte de temps empêche la fuite par l’étude infinie.
+        </li>
+        <li>
+          <strong>Justification traçable :</strong>
+          ce qui est compris, ce qui est ignoré, et ce qui fait douter.
+          <span class="muted">(la lucidité compte plus que l’exactitude)</span>
+        </li>
+        <li>
+          <strong>Signature :</strong>
+          nom réel, ou pseudonyme <em>stable</em> assumé dans la durée.
+        </li>
+        <li>
+          <strong>La confiance n’est pas un vote :</strong>
+          une seule question : <em>« suivrais-je cette personne si une conséquence réelle dépendait de cette décision ? »</em>
+        </li>
+      </ol>
+
+      <div class="hr"></div>
+
+      <h3 class="section-title">5. Ce qui est attendu</h3>
+      <p><strong>Participants :</strong> décider malgré l’incertitude, être jugé sur le raisonnement, laisser une trace.</p>
+      <p><strong>Observateurs :</strong> lire attentivement, refuser le cynisme, reconnaître que la confiance engage.</p>
+
+      <div class="hr"></div>
+
+      <h3 class="section-title">6. Pourquoi ce lieu existe</h3>
+      <p>
+        Parce que le monde moderne permet d’apprendre sans décider, de décider sans comprendre, et de faire confiance sans s’exposer.
+        Ce lieu existe pour <strong>réunifier ces trois actes</strong>.
+      </p>
+
+      <div class="hr"></div>
+
+      <h3 class="section-title">7. Dernier avertissement</h3>
+      <p class="muted">
+        Si vous cherchez la sécurité, la validation sociale, ou l’absence de friction, ce lieu n’est pas fait pour vous.
+      </p>
+    </section>
+
+    <!-- Colonne latérale -->
+    <aside class="card" aria-label="Interaction minimale">
+      <h2>Module minimal</h2>
+      <p class="muted">
+        Ceci illustre deux éléments utiles : (1) un acte de confiance Oui/Non, (2) une proposition de défi.
+        Les données sont stockées en <span class="mono">localStorage</span> (dans le navigateur).
+      </p>
+
+      <div class="hr"></div>
+
+      <h3 class="section-title">Acte de confiance (exemple)</h3>
+      <p>
+        Question unique :
+        <br /><span class="mono">Si une conséquence réelle dépendait de cette décision, suivrais-je cette personne ?</span>
+      </p>
+
+      <div class="btn-row">
+        <button class="btn-yes" id="trustYes" type="button">Oui, je suivrais</button>
+        <button class="btn-no" id="trustNo" type="button">Non, je ne suivrais pas</button>
+        <button id="trustReset" type="button" title="Réinitialiser les compteurs">Réinitialiser</button>
+      </div>
+
+      <div class="stat">
+        <div class="bar" aria-label="Barre de confiance">
+          <div id="trustBar"></div>
+        </div>
+        <div>
+          <small><span id="yesCount">0</span> Oui</small><br/>
+          <small><span id="noCount">0</span> Non</small>
+        </div>
+      </div>
+
+      <div class="toast" id="toast" role="status" aria-live="polite"></div>
+
+      <div class="hr"></div>
+
+      <h3 class="section-title">Proposer un défi</h3>
+      <form id="proposalForm">
+        <label for="title">Titre du défi</label>
+        <input id="title" name="title" placeholder="Ex : Décider avec information incomplète" required />
+
+        <label for="duration">Durée</label>
+        <select id="duration" name="duration">
+          <option value="48h">48 heures</option>
+          <option value="72h" selected>72 heures</option>
+          <option value="7j">7 jours</option>
+        </select>
+
+        <label for="prompt">Consigne (courte)</label>
+        <textarea id="prompt" name="prompt" placeholder="Décrivez le sujet, la décision attendue, et le livrable (500–800 mots par exemple)." required></textarea>
+
+        <label for="signature">Signature (nom ou pseudo stable)</label>
+        <input id="signature" name="signature" placeholder="Ex : Monseigneur / PseudoStable42" required />
+
+        <div class="btn-row">
+          <button type="submit">Enregistrer la proposition</button>
+          <button id="loadLast" type="button">Charger la dernière</button>
+          <button id="clearLast" type="button">Effacer</button>
+        </div>
+      </form>
+
+      <div class="footer">
+        Astuce : pour un vrai lancement, vous remplacerez <span class="mono">localStorage</span> par une sauvegarde serveur (ou un Google Form).
+      </div>
+    </aside>
+  </main>
+
+  <script>
+    // --- Utilitaires ---
+    const $ = (id) => document.getElementById(id);
+
+    function toast(msg) {
+      const el = $("toast");
+      el.textContent = msg;
+      el.classList.add("show");
+      window.clearTimeout(toast._t);
+      toast._t = window.setTimeout(() => el.classList.remove("show"), 2200);
+    }
+
+    // --- Module confiance (Oui/Non) ---
+    const TRUST_KEY = "ddr_trust_counts_v1";
+
+    function getCounts() {
+      try {
+        return JSON.parse(localStorage.getItem(TRUST_KEY)) ?? { yes: 0, no: 0 };
+      } catch {
+        return { yes: 0, no: 0 };
+      }
+    }
+
+    function setCounts(counts) {
+      localStorage.setItem(TRUST_KEY, JSON.stringify(counts));
+      renderCounts();
+    }
+
+    function renderCounts() {
+      const { yes, no } = getCounts();
+      $("yesCount").textContent = String(yes);
+      $("noCount").textContent = String(no);
+
+      const total = yes + no;
+      const yesPct = total === 0 ? 50 : Math.round((yes / total) * 100);
+      $("trustBar").style.width = yesPct + "%";
+      $("trustBar").setAttribute("aria-valuenow", String(yesPct));
+      $("trustBar").setAttribute("aria-valuemin", "0");
+      $("trustBar").setAttribute("aria-valuemax", "100");
+    }
+
+    $("trustYes").addEventListener("click", () => {
+      const c = getCounts();
+      c.yes += 1;
+      setCounts(c);
+      toast("Acte de confiance enregistré : OUI.");
+    });
+
+    $("trustNo").addEventListener("click", () => {
+      const c = getCounts();
+      c.no += 1;
+      setCounts(c);
+      toast("Acte de confiance enregistré : NON.");
+    });
+
+    $("trustReset").addEventListener("click", () => {
+      setCounts({ yes: 0, no: 0 });
+      toast("Compteurs réinitialisés.");
+    });
+
+    // --- Proposer un défi ---
+    const PROPOSAL_KEY = "ddr_last_proposal_v1";
+
+    $("proposalForm").addEventListener("submit", (e) => {
+      e.preventDefault();
+
+      const data = {
+        title: $("title").value.trim(),
+        duration: $("duration").value,
+        prompt: $("prompt").value.trim(),
+        signature: $("signature").value.trim(),
+        savedAt: new Date().toISOString()
+      };
+
+      localStorage.setItem(PROPOSAL_KEY, JSON.stringify(data));
+      toast("Proposition enregistrée (localement).");
+      e.target.reset();
+      $("duration").value = "72h";
+    });
+
+    $("loadLast").addEventListener("click", () => {
+      const raw = localStorage.getItem(PROPOSAL_KEY);
+      if (!raw) return toast("Aucune proposition enregistrée.");
+
+      let data;
+      try { data = JSON.parse(raw); }
+      catch { return toast("Données illisibles. Effacez et recommencez."); }
+
+      $("title").value = data.title ?? "";
+      $("duration").value = data.duration ?? "72h";
+      $("prompt").value = data.prompt ?? "";
+      $("signature").value = data.signature ?? "";
+      toast("Dernière proposition chargée.");
+    });
+
+    $("clearLast").addEventListener("click", () => {
+      localStorage.removeItem(PROPOSAL_KEY);
+      toast("Dernière proposition effacée.");
+    });
+
+    // Init
+    renderCounts();
+  </script>
+</body>
+</html>
